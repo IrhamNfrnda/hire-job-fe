@@ -4,7 +4,7 @@ import Link from "next/link";
 function Navigations() {
   return (
     <div className="bg-white pb-3">
-      <nav className="container pt-3">
+      <nav className="container pt-3" style={{ width: '100%' }}>
         <div className="d-flex justify-content-between align-items-center">
           <img src="/logo.png" alt="logo" />
 
@@ -18,7 +18,7 @@ function Navigations() {
               </button>
             </Link>
             <Link href="/register">
-              <button button className="btn btn-primary">
+              <button className="btn btn-primary">
                 Daftar
               </button>
             </Link>
@@ -26,6 +26,7 @@ function Navigations() {
         </div>
       </nav>
     </div>
+
   );
 }
 

@@ -1,0 +1,22 @@
+#auth_page {
+    .row {
+        height: 100vh;
+    }
+    
+    .col {
+        @media (max-width: 770px) {
+            &.side-screen {
+                position: relative;
+                display: none;
+            }
+    
+            &.form-container {
+                flex: 1;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}

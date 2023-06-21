@@ -68,7 +68,7 @@ function Profile() {
               </ul>
 
               {company.map((item, key) => (
-                <div className="row mt-4" key={key}>
+                <div className="row" key={key}>
                   <div className="col col-md-2">
                     <img src="hiring-1.jpg" style={{ width: "100%" }} />
                   </div>

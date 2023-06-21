@@ -1,3 +1,75 @@
 #home_page {
-    
+
+    .image-container {
+        position: relative;
+
+        .image-fill {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .first-section {
+        @media (max-width: 770px) {
+            img {
+                content: url('/home_1.jpg');
+            }
+
+            .image-container {
+                margin-bottom: 50px;
+            }
+        }
+    }
+
+    .second-section {
+        @media (max-width: 770px) {
+            margin-bottom: 70px !important;
+
+            .image-container {
+                margin-bottom: 50px;
+
+                img {
+                    content: url('/home_2.jpg');
+                }
+            }
+
+            .list {
+                margin-bottom: 15px !important;
+            }
+        }
+    }
+
+    .third-section {
+        @media (max-width: 770px) {
+            margin-bottom: 50px !important;
+
+            .image-container {
+                margin-bottom: 50px;
+
+                img {
+                    content: url('/home_3.jpg');
+                }
+            }
+
+            .list {
+                margin-bottom: 15px !important;
+            }
+        }
+    }
+
+    .five-section {
+        .btn {
+            background-color: white !important;
+            color: #796EAF;
+        }
+
+        .row {
+            padding: 50px;
+            margin-bottom: 150px;
+            background-image: url("/last_bg.svg");
+            background-size: 100% 100%;
+            background-position: center;
+        }
+    }
 }
