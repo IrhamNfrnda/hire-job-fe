@@ -60,7 +60,7 @@ function Profile() {
           </div>
           <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-4">
             <div className="card p-4">
-              <ul className="nav nav-underline">
+              <ul className="nav nav-underline mb-3">
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="#">
                     Pengalaman kerja

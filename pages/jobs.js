@@ -4,6 +4,8 @@ import Navigations from '@/components/Navigations'
 import Footer from '@/components/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 export default function jobs() {
     return (
@@ -32,8 +34,14 @@ export default function jobs() {
                         <span class="input-group-text">
                             <FontAwesomeIcon icon={faSearch} />
                         </span>
-                        <button class="btn btn-outline-primary" type="button">Category</button>
-                        <button class="btn btn-outline-primary" type="button">Search</button>
+                        <DropdownButton id="dropdown-basic-button" variant="outline-primary" title="Sort">
+                            <Dropdown.Item href="#">Sortir berdasarkan nama</Dropdown.Item>
+                            <Dropdown.Item href="#">Sortir berdasarkan Skill</Dropdown.Item>
+                            <Dropdown.Item href="#">Sortir berdasarkan Lokasi</Dropdown.Item>
+                            <Dropdown.Item href="#">Sortir berdasarkan freelance</Dropdown.Item>
+                            <Dropdown.Item href="#">Sortir berdasarkan fulltime</Dropdown.Item>
+                        </DropdownButton>
+                        <button class="btn btn-primary" type="button">Search</button>
                     </div>
                 </section>
 

@@ -9,7 +9,7 @@ export default function Contact() {
 
             <div className="container mt-5 mb-5">
                 <div className="row">
-                    <div className="col col-md-4">
+                    <div className="col col-md-4 col-sm-12">
                         <div className="card p-4">
                             <div className="d-flex justify-content-center">
                                 <img
@@ -53,7 +53,7 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
-                    <div className="col col-md-8">
+                    <div className="col col-md-8 col-sm-12 mt-sm-4">
                         <h2>Hubungi Lous Tomlinson</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
                         <div class="mt-3 mb-4">
