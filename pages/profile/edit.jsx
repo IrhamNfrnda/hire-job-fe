@@ -10,7 +10,7 @@ function Profile() {
 
       <div className="container mt-5 mb-5">
         <div className="row">
-          <div className="col col-md-4 mt-2">
+          <div className="col col-md-4 col-sm-12">
             <div className="card p-4">
               <div className="d-flex justify-content-center">
                 <img
@@ -56,7 +56,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="col col-md-8 mt-2">
+          <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-5">
             <div className="card p-4 mb-4">
               <h3>Data Diri</h3>
               <hr />
@@ -89,7 +89,7 @@ function Profile() {
                   <input type="text" class="form-control" id="skillInput" placeholder="Java" />
                 </div>
                 <div className="col-md-2">
-                  <button className="btn btn-warning text-white">Simpan</button>
+                  <button className="btn btn-warning text-white mt-md-0 mt-sm-2">Simpan</button>
                 </div>
               </div>
             </div>

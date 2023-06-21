@@ -11,7 +11,7 @@ function Profile() {
 
       <div className="container mt-5 mb-5">
         <div className="row">
-          <div className="col col-md-4">
+          <div className="col col-md-4 col-sm-12">
             <div className="card p-4">
               <div className="d-flex justify-content-center">
                 <img
@@ -36,6 +36,7 @@ function Profile() {
                 Curabitur eu lacus fringilla, vestibulum risus at.
               </p>
 
+                  
               <button className="btn btn-primary btn-lg mt-4 mb-3">Hire</button>
 
               <h2 style={{ fontSize: "25px" }}>Skills</h2>
@@ -57,7 +58,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="col col-md-8">
+          <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-4">
             <div className="card p-4">
               <ul className="nav nav-underline">
                 <li className="nav-item">

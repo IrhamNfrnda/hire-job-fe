@@ -16,6 +16,7 @@ function Login() {
     axios.post("/api/auth/login", { email, password })
     .then((response) => {
       localStorage.setItem("token", response?.data?.token);
+      localStorage.setItem("auth", "true");
 
       router.replace('/profile');
     })
