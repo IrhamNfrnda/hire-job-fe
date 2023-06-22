@@ -10,6 +10,12 @@ function Login() {
   const [password, setPassword] = React.useState("");
   const [errMsg, setErrMsg] = React.useState(null);
 
+  React.useEffect(() => {
+    if (localStorage.getItem("auth") !== null) {
+      router.replace('/profile');
+    }
+  }, []);
+
   const handleLogin = (event) => {
     event.preventDefault();
 
