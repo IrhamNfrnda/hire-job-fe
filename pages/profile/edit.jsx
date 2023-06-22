@@ -35,25 +35,8 @@ function Profile() {
                 Curabitur eu lacus fringilla, vestibulum risus at.
               </p>
 
-              <button className="btn btn-primary btn-lg mt-4 mb-3">Hire</button>
-
-              <h2 style={{ fontSize: "25px" }}>Skills</h2>
-
-              <div className="d-inline">
-                {[
-                  "Phyton",
-                  "Laravel",
-                  "Golang",
-                  "Ruby",
-                  "Rust",
-                  "Javascript",
-                  "Express",
-                ].map((item, key) => (
-                  <span key={key} class="badge bg-warning m-1 p-2 ">
-                    {item}
-                  </span>
-                ))}
-              </div>
+              <button className="btn btn-primary btn-lg mt-4 mb-3">Simpan</button>
+              <button className="btn btn-outline-primary btn-lg mt-4 mb-3">Batal</button>
             </div>
           </div>
           <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-5">
@@ -120,7 +103,7 @@ function Profile() {
               </div>
               <hr />
               <div class="d-grid">
-                <button class="btn btn-outline-warning fw-semibold" type="button">Button</button>
+                <button class="btn btn-outline-warning fw-semibold" type="button">Simpan</button>
               </div>
             </div>
           </div>
