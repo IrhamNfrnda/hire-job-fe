@@ -35,8 +35,8 @@ function Profile() {
                 Curabitur eu lacus fringilla, vestibulum risus at.
               </p>
 
-              <button className="btn btn-primary btn-lg mt-4 mb-3">Simpan</button>
-              <button className="btn btn-outline-primary btn-lg mt-4 mb-3">Batal</button>
+              <button className="btn btn-primary btn-lg mt-4">Simpan</button>
+              <button className="btn btn-outline-primary btn-lg mt-1">Batal</button>
             </div>
           </div>
           <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-5">
