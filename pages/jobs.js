@@ -103,6 +103,60 @@ export default function jobs() {
                                 <button class="btn btn-primary">Lihat Profile</button>
                             </div>
                         </div>
+                        <hr />
+                        <div class="row align-items-center">
+                            <div class="col-md-1 ms-3">
+                                <img src="/profile_photos/profile1.png" class="img-fluid" alt="Photo Profile" />
+                            </div>
+                            <div class="col-md-7 ms-0">
+                                <div class="card-body">
+                                    <h5 class="card-title my-1">Nama Lengkap</h5>
+                                    <p class="card-text text-body-secondary my-1">Pekerjaan</p>
+                                    <p class="card-text my-1"><FontAwesomeIcon icon={faLocationDot} style={{ color: "#9e9e9e", }} /><small class="text-body-secondary ms-1">Lokasi</small></p>
+                                    <div className="d-inline">
+                                        {[
+                                            "Phyton",
+                                            "Laravel",
+                                            "Golang",
+                                        ].map((item, key) => (
+                                            <span key={key} class="badge bg-warning my-1 me-1 p-2 ">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-end me-1">
+                                <button class="btn btn-primary">Lihat Profile</button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row align-items-center">
+                            <div class="col-md-1 ms-3">
+                                <img src="/profile_photos/profile1.png" class="img-fluid" alt="Photo Profile" />
+                            </div>
+                            <div class="col-md-7 ms-0">
+                                <div class="card-body">
+                                    <h5 class="card-title my-1">Nama Lengkap</h5>
+                                    <p class="card-text text-body-secondary my-1">Pekerjaan</p>
+                                    <p class="card-text my-1"><FontAwesomeIcon icon={faLocationDot} style={{ color: "#9e9e9e", }} /><small class="text-body-secondary ms-1">Lokasi</small></p>
+                                    <div className="d-inline">
+                                        {[
+                                            "Phyton",
+                                            "Laravel",
+                                            "Golang",
+                                        ].map((item, key) => (
+                                            <span key={key} class="badge bg-warning my-1 me-1 p-2 ">
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex justify-content-end me-1">
+                                <button class="btn btn-primary">Lihat Profile</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 {/* End of List Jobs Card */}

@@ -18,7 +18,7 @@ export default function handler(req, res) {
     return;
   }
 
-  if(body?.email === "admin@pijar.com" && body?.password === "12345678") {
+  if(body?.email === "inofrianda@gmail.com" && body?.password === "12345678") {
     res.status(200).json({ message: "Login sucess", token: '123' });
   } else {
     res.status(400).json({ message: "Email / Password is incorect" });

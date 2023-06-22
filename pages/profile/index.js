@@ -1,9 +1,23 @@
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import React from "react";
 import Navigations from "@/components/Navigations";
 import Footer from "@/components/Footer";
 
 function Profile() {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (localStorage.getItem("auth") == null) {
+      router.replace('/login');
+    }
+  }, []);
+
+  // Function to redirect to edit profile page
+  const handleEditProfile = () => {
+    router.push('/profile/edit');
+  };
+
   let company = [...new Array(2)];
   return (
     <div id="profile_page">
@@ -36,8 +50,8 @@ function Profile() {
                 Curabitur eu lacus fringilla, vestibulum risus at.
               </p>
 
-                  
-              <button className="btn btn-primary btn-lg mt-4 mb-3">Hire</button>
+
+              <button className="btn btn-primary btn-lg mt-4 mb-3" onClick={handleEditProfile}>Edit</button>
 
               <h2 style={{ fontSize: "25px" }}>Skills</h2>
 
