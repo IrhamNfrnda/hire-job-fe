@@ -3,13 +3,27 @@ import { useRouter } from 'next/router';
 import React from "react";
 import Navigations from "@/components/Navigations";
 import Footer from "@/components/Footer";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
   const router = useRouter();
+  const [userData, setUserData] = React.useState("")
 
   React.useEffect(() => {
     if (localStorage.getItem("auth") == null) {
-      router.replace('/login');
+      router.replace("/login");
+    } else {
+      // Fetch user data from the API
+      axios
+        .get(`https://hire-job.onrender.com/v1/profile`)
+        .then((response) => {
+          setUserData(response?.data?.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
     }
   }, []);
 
@@ -17,6 +31,7 @@ function Profile() {
   const handleEditProfile = () => {
     router.push('/profile/edit');
   };
+
 
   let company = [...new Array(2)];
   return (
@@ -40,14 +55,19 @@ function Profile() {
               </div>
 
               <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
-                Louis Tomlinson
+                {userData?.fullname}
               </h1>
-              <p>Web Developer</p>
+              <p>{userData?.job_title}</p>
+
+              <div className="d-flex mb-3 align-items-center">
+                <FontAwesomeIcon icon={faLocationDot} />
+                <p className="text-muted ms-2 mb-0">
+                  {userData?.domicile}
+                </p>
+              </div>
 
               <p className="text-black-50">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum erat orci, mollis nec gravida sed, ornare quis urna.
-                Curabitur eu lacus fringilla, vestibulum risus at.
+                {userData?.description}
               </p>
 
 
@@ -56,20 +76,13 @@ function Profile() {
               <h2 style={{ fontSize: "25px" }}>Skills</h2>
 
               <div className="d-inline">
-                {[
-                  "Phyton",
-                  "Laravel",
-                  "Golang",
-                  "Ruby",
-                  "Rust",
-                  "Javascript",
-                  "Express",
-                ].map((item, key) => (
+                {userData?.skills?.map((item, key) => (
                   <span key={key} class="badge bg-warning m-1 p-2 ">
                     {item}
                   </span>
                 ))}
               </div>
+
             </div>
           </div>
           <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-4">
@@ -82,32 +95,34 @@ function Profile() {
                 </li>
               </ul>
 
-              {company.map((item, key) => (
-                <div className="row" key={key}>
-                  <div className="col col-md-2">
-                    <img src="hiring-1.jpg" style={{ width: "100%" }} />
+              {
+                userData?.job_history == 0 ? (
+                  <div className="d-flex justify-content-center">
+                    <h3 className="text-black-50 text-center mt-3">
+                      Belum ada pengalaman kerja
+                    </h3>
                   </div>
-                  <div className="col col-md-10">
-                    <h5 className="mb-0">Trainer</h5>
-                    <p className="mb-0">Pijar Camp</p>
-                    <div className="d-flex align-items-center">
-                      <p style={{ color: "#9EA0A5" }}>
-                        July 2019 - January 2020
-                      </p>
-                      <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>
-                        6 months
-                      </p>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                      urna. Curabitur eu lacus fringilla, vestibulum risus at.
-                    </p>
+                ) : (
+                  userData?.job_history?.map((item, key) => (
+                    <div className="row" key={key}>
+                      <div className="col col-md-2">
+                        <img src={item.logo} style={{ width: "100%" }} alt="Company Logo" />
+                      </div>
+                      <div className="col col-md-10">
+                        <h5 className="mb-0">{item.position}</h5>
+                        <p className="mb-0">{item.company}</p>
+                        <div className="d-flex align-items-center">
+                          <p style={{ color: "#9EA0A5" }}>{item.date}</p>
+                          <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>6 bulan</p>
+                        </div>
+                        <p>{item.description}</p>
 
-                    {key === company.length - 1 ? null : <hr />}
-                  </div>
-                </div>
-              ))}
+                        {key === userData.job_history.length - 1 ? null : <hr />}
+                      </div>
+                    </div>
+                  ))
+                )
+              }
             </div>
           </div>
         </div>

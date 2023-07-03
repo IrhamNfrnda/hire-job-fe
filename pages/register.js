@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
 export default function register() {
@@ -11,28 +12,55 @@ export default function register() {
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [confirmPassword, setConfirmPassword] = React.useState("");
+    const [jobTitle, setJobTitle] = React.useState("");
+    const [company, setCompany] = React.useState("");
     const [errMsg, setErrMsg] = React.useState(null);
 
     React.useEffect(() => {
         if (localStorage.getItem("auth") !== null) {
-          router.replace('/profile');
+            router.replace('/');
         }
-      }, []);
-    
+    }, []);
 
-    const handleLogin = (event) => {
-        event.preventDefault();
+    const handleRegister = (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            setErrMsg("Password tidak sama");
+            return;
+        }
 
-        axios.post("/api/auth/register", { email, password })
-            .then((response) => {
-                localStorage.setItem("token", response?.data?.token);
+        // show loading before axios finish
+        Swal.fire({
+            title: "Please wait...",
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
 
-                router.replace('/profile');
+        axios
+            .post(`https://hire-job.onrender.com/v1/auth/register`, {
+                email: email,
+                password: password,
+                fullname: name,
+                company: company,
+                job_title: jobTitle,
+                phone: phoneNumber
             })
-            .catch(({ response }) => {
-                setErrMsg(response?.data?.message ?? "Something wrong in our server");
+            .then((result) => {
+                Swal.fire({
+                    title: "Register Success",
+                    text: "Register success, please login...",
+                    icon: "success",
+                }).then(() => {
+                    router.replace('/login');
+                });
+            })
+            .catch((error) => {
+                console.log(error);
             });
     };
+
 
     return (
         <main className="container" id="auth_page">
@@ -42,7 +70,7 @@ export default function register() {
                         <div
                             className="bg-primary content-to-center"
                             style={{
-                                height: "95vh",
+                                height: "120vh",
                                 width: "100%",
                                 position: "absolute",
                                 top: 0,
@@ -56,13 +84,12 @@ export default function register() {
                         </div>
                     </div>
 
-                    <img src="/auth.png" width="100%" style={{ height: "95vh" }} />
+                    <img src="/auth.png" width="100%" style={{ height: "120vh" }} />
                 </div>
                 <div className="col-md-6 p-4 form-container">
                     <h2>Halo, Pewpeople</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-                        ipsum et dui rhoncus auctor.
+                        Silahkan isi Form dibawah ini untuk menjadi bagian dari Pewpeople.
                     </p>
 
                     {errMsg ? (
@@ -71,15 +98,15 @@ export default function register() {
                         </div>
                     ) : null}
 
-                    <form onSubmit={handleLogin}>
+                    <form onSubmit={handleRegister}>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">
+                            <label for="InputName" class="form-label">
                                 Nama
                             </label>
                             <input
                                 type="name"
                                 class="form-control form-control-lg"
-                                id="exampleInputEmail1"
+                                id="InputName"
                                 aria-describedby="nameHelp"
                                 placeholder="Masukan nama panjang"
                                 onChange={(e) => setName(e.target.value)}
@@ -87,13 +114,13 @@ export default function register() {
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">
+                            <label for="InputEmail1" class="form-label">
                                 Email
                             </label>
                             <input
                                 type="email"
                                 class="form-control form-control-lg"
-                                id="exampleInputEmail1"
+                                id="InputEmail1"
                                 aria-describedby="emailHelp"
                                 placeholder="Masukan alamat email"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -101,13 +128,41 @@ export default function register() {
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">
+                            <label for="InputJob" class="form-label">
+                                Job Title
+                            </label>
+                            <input
+                                type="job"
+                                class="form-control form-control-lg"
+                                id="InputJob"
+                                aria-describedby="emailHelp"
+                                placeholder="Masukan Bidang Pekerjaan"
+                                onChange={(e) => setJobTitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputCompany" class="form-label">
+                                Company
+                            </label>
+                            <input
+                                type="text"
+                                class="form-control form-control-lg"
+                                id="InputCompany"
+                                aria-describedby="emailHelp"
+                                placeholder="Masukan Nama Perusahaan"
+                                onChange={(e) => setCompany(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="InputPhone" class="form-label">
                                 No Handphone
                             </label>
                             <input
                                 type="phone"
                                 class="form-control form-control-lg"
-                                id="exampleInputEmail1"
+                                id="InputPhone"
                                 aria-describedby="phoneHelp"
                                 placeholder="Masukan nomor handphone"
                                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -128,13 +183,13 @@ export default function register() {
                             />
                         </div>
                         <div class="mb-5">
-                            <label for="exampleInputPassword1" class="form-label">
+                            <label for="exampleInputPassword2" class="form-label">
                                 Konfirmasi Kata Sandi
                             </label>
                             <input
                                 type="password"
                                 class="form-control form-control-lg"
-                                id="exampleInputPassword1"
+                                id="exampleInputPassword2"
                                 placeholder="Masukan konfirmasi kata sandi"
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required

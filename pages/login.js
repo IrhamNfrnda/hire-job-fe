@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
 function Login() {
@@ -16,23 +17,43 @@ function Login() {
     }
   }, []);
 
-  const handleLogin = (event) => {
-    event.preventDefault();
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-    axios.post("/api/auth/login", { email, password })
-    .then((response) => {
-      localStorage.setItem("token", response?.data?.token);
-      localStorage.setItem("auth", "true");
-
-      router.replace('/profile');
-    })
-    .catch(({ response }) => {
-      setErrMsg(response?.data?.message ?? "Something wrong in our server");
+    // show loading before axios finish
+    Swal.fire({
+      title: "Please wait...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
+
+    axios.post("https://hire-job.onrender.com/v1/auth/login", { email, password })
+      .then((response) => {
+        router.replace('/profile');
+        Swal.fire({
+          title: "Login Success",
+          text: "Login success, redirect to app...",
+          icon: "success",
+        }).then(() => {
+          console.log(response);
+          localStorage.setItem("auth", "true");
+          localStorage.setItem("userId", response?.data?.data?.user?.id);
+          localStorage.setItem("userName", response?.data?.data?.user?.fullname);
+          localStorage.setItem("userEmail", response?.data?.data?.user?.email);
+          localStorage.setItem("userPhoto", response?.data?.data?.user?.photo);
+          localStorage.setItem("token", response?.data?.data?.token);
+          router.replace('/profile');
+        });
+      })
+      .catch(({ response }) => {
+        setErrMsg(response?.data?.message ?? "Something wrong in our server");
+      });
   };
 
   return (
-    <main className="container"  id="auth_page">
+    <main className="container" id="auth_page">
       <div className="row align-items-center mt-3">
         <div className="col col-md-6 side-screen">
           <div style={{ position: "relative" }}>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Navigations() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -9,6 +11,11 @@ function Navigations() {
   useEffect(() => {
     setIsAuthenticated(localStorage.getItem("auth") !== null);
   }, []);
+  
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/login";
+  };
 
   return (
     <div className="bg-white pb-3">
@@ -21,16 +28,25 @@ function Navigations() {
           {isAuthenticated ?
             (
               <div>
-                <Link className="btn btn-transparent" href="#">
-                  <FontAwesomeIcon icon={faBell} style={{ color: "#7a7a7a", }} />
+                {/* <Link className="btn btn-transparent" href="#">
+                  <FontAwesomeIcon icon={faBell} style={{ color: "#7a7a7a" }} />
                 </Link>
                 <Link className="btn btn-transparent" href="#">
-                  <FontAwesomeIcon icon={faEnvelope} style={{ color: "#7a7a7a", }} />
-                </Link>
-                <Link className="btn btn-transparent" href="/profile">
-                  <img src="/profile_photos/profile_icon.png" />
-                </Link>
+                  <FontAwesomeIcon icon={faEnvelope} style={{ color: "#7a7a7a" }} />
+                </Link> */}
+                <Dropdown align="end">
+                  <Dropdown.Toggle variant="transparent" id="profile-dropdown">
+                    <img src="/profile_photos/profile_icon.png" alt="Profile" />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                    <Dropdown.Item href="/jobs">Jobs</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
+
             ) : (
               <div>
                 <Link href="/login">
