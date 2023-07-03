@@ -112,7 +112,7 @@ export async function getStaticPaths() {
   // Call an external API endpoint to get posts
   const {
     data: { data },
-  } = await axios.get("http://localhost:3200/v1/job/all");
+  } = await axios.get("https://hire-job.onrender.com/v1/job/all");
 
   // Get the paths we want to pre-render based on posts
   const paths = data.map((post) => ({
