@@ -1,38 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hire Job Portfolio  📝👔🔍
 
-## Getting Started
+## Project Description 🚀
 
-First, run the development server:
+Hire Job offers a range of features designed to facilitate job search and recruitment. With a user-friendly interface, job seekers can easily search and explore available job opportunities. The platform aims to connect job seekers with potential employers, streamlining the job application process.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Technologies Used 💻🛠️
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The Hire Job project is built using the following technologies:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- SASS (Syntactically Awesome Style Sheets)
+- JQuery
+- NEXT.JS (React framework)
+- Google Analytics (Web analytics service)
+- Error Analytics (Error tracking and monitoring)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Project Repository 📂🔗
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The backend repository for this project can be found on GitHub at the following link:
+[Hire Job Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features ✨🔍
 
-## Learn More
+- User-friendly job search and exploration
+- Job application management
+- Employer job posting and management
+- Candidate profile creation and editing
+- Job alerts and notifications
+- Seamless user experience with NEXT.JS
+- Monitoring and analysis of website traffic with Google Analytics
+- Tracking and resolving errors with Error Analytics
 
-To learn more about Next.js, take a look at the following resources:
+## Getting Started 🏁🚀
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To set up the Hire Job project locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the backend repository from the provided link.
+2. Install the required dependencies using npm.
+3. Set up your database and update the configuration accordingly.
+4. Ensure you have Node.js and npm installed on your system.
+5. Start the development server using the command `npm run dev`.
+6. Access the project through your preferred web browser.
 
-## Deploy on Vercel
+## Contributions 🤝🌟
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions to the Hire Job project are welcome. If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request in the backend repository.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License 📜📝
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact 📞📧
+
+If you have any questions or inquiries regarding this project, feel free to contact me at [irhamnfrnda@gmail.com](mailto:irhamnfrnda@gmail.com).
+
+---
+
+Thank you for exploring my Hire Job portfolio. I hope this project showcases my skills and enthusiasm for creating innovative solutions in the job recruitment industry.
