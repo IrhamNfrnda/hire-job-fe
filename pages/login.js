@@ -29,7 +29,7 @@ function Login() {
       },
     });
 
-    axios.post("https://hire-job.onrender.com/v1/auth/login", { email, password })
+    axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password })
       .then((response) => {
         router.replace('/profile');
         Swal.fire({

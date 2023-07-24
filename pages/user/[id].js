@@ -74,7 +74,7 @@ function Profile() {
               {company.map((item, key) => (
                 <div className="row mt-4" key={key}>
                   <div className="col col-md-2">
-                    <img src="hiring-1.jpg" style={{ width: "100%" }} />
+                    <img src="https://res.cloudinary.com/infomediaon5/image/upload/v1688329705/agvbbsjlmjynzghhjb2d.jpg" style={{ width: "100%" }} />
                   </div>
                   <div className="col col-md-10">
                     <h5 className="mb-0">Trainer</h5>

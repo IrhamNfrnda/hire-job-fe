@@ -7,7 +7,7 @@ import CardCarousel from "../components/CardCarousel";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  
+
   return (
     <>
       <main id="home_page">
@@ -21,8 +21,7 @@ export default function Home() {
                 Talenta terbaik negri untuk perubahan revolusi 4.0
               </h1>
               <p className="d-block mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-                ipsum et dui rhoncus auctor.
+                Peworld adalah aplikasi inovatif yang memberikan kemudahan bagi para pencari kerja dan perekrut dalam menemukan talenta terbaik untuk mendukung perubahan di era Revolusi Industri 4.0.
               </p>
               <Link href="/register">
                 <button className="btn btn-primary btn-lg">
@@ -44,14 +43,19 @@ export default function Home() {
               <img src="/home_image2_full.png" className="image-fill" alt="Home Picture" />
             </div>
             <div className="col-md-5">
-              <h2 className="mb-5">Kenapa harus mencari tallent di peworld</h2>
-
-              {[...new Array(4)].map((item, key) => (
-                <div className="d-flex align-items-center mb-5 list" key={key}>
-                  <img src="/circleCheck.svg" style={{ marginRight: "20px" }} />
-                  <p className="mb-0">Lorem ipsum dolor sit amet.</p>
-                </div>
-              ))}
+              <h2 className="mb-5">Kenapa harus mencari tallent di Peworld</h2>
+              <div className="d-flex align-items-center mb-5 list">
+                <img src="/circleCheck.svg" style={{ marginRight: "20px" }} />
+                <p className="mb-0">Peworld menawarkan akses mudah ke ribuan lowongan pekerjaan dan talent yang berbakat.</p>
+              </div>
+              <div className="d-flex align-items-center mb-5 list">
+                <img src="/circleCheck.svg" style={{ marginRight: "20px" }} />
+                <p className="mb-0">Peworld menyediakan profil memungkinkan Anda untuk menonjolkan kualifikasi, pengalaman, dan prestasi Anda kepada para perekrut terbaik.</p>
+              </div>
+              <div className="d-flex align-items-center mb-5 list">
+                <img src="/circleCheck.svg" style={{ marginRight: "20px" }} />
+                <p className="mb-0">Peworld menjamin keamanan dan kerahasiaan data pribadi Anda, memberikan rasa percaya diri selama proses pencarian kerja dan rekrutmen.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -63,8 +67,7 @@ export default function Home() {
             <div className="col-md-5 order-md-1 order-2">
               <h2>Skill Tallent</h2>
               <p className="mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                euismod ipsum et dui rhoncus auctor.
+              Peworld menyediakan talent yang memiliki skill unggulan.
               </p>
 
               <div className="row justify-content-between">
@@ -118,7 +121,7 @@ export default function Home() {
         <section className="container five-section" >
           <div className="row justify-content-between d-flex align-items-center mx-3">
             <div className="col-md-2">
-              <h2 className="text-white d-none d-md-block">Lorem ipsum dolor sit amet</h2>
+              <h2 className="text-white d-none d-md-block">Ayo bergabung menjadi bagian dari Peworld</h2>
             </div>
             <div className="col-md-2">
               <button className="btn btn-primary btn-lg">
