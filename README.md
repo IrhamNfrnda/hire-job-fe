@@ -34,6 +34,15 @@ The backend repository for this project can be found on GitHub at the following 
 - Monitoring and analysis of website traffic with Google Analytics
 - Tracking and resolving errors with Error Analytics
 
+## Screenshots 📸
+
+<table>
+   <tr>
+    <td><img width="350px" src="./screenshot/login.png" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/register.png" border="0"  alt="Register" /></td>
+  </tr>
+</table>
+
 ## Getting Started 🏁🚀
 
 To set up the Hire Job project locally, follow these steps:
