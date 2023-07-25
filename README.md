@@ -21,7 +21,7 @@ The Hire Job project is built using the following technologies:
 ## Project Repository 📂🔗
 
 The backend repository for this project can be found on GitHub at the following link:
-[Hire Job Backend Repository](https://github.com/IrhamNfrnda/food-recipe-be](https://github.com/IrhamNfrnda/hire_job_be)
+[Hire Job Backend Repository](https://github.com/IrhamNfrnda/hire_job_be)
 
 ## Features ✨🔍
 
