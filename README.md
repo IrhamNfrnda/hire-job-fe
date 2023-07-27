@@ -38,8 +38,28 @@ The backend repository for this project can be found on GitHub at the following 
 
 <table>
    <tr>
-    <td><img width="350px" src="./screenshot/home.png" border="0" alt="Login" /></td>
+    <td>Home Page/></td>
+    <td>Profile Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/Home.jpeg" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/profile.png" border="0"  alt="Register" /></td>
+  </tr>
+   <tr>
+    <td>Login Page/></td>
+    <td>Register Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/Login.jpeg" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/Register.jpeg" border="0"  alt="Register" /></td>
+  </tr>
+   <tr>
+    <td>Jobs List Page/></td>
+    <td></td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/Jobs.jpeg" border="0" alt="Login" /></td>
+    <td></td>
   </tr>
 </table>
 
