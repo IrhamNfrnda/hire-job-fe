@@ -79,8 +79,7 @@ function Login() {
         <div className="col-md-6 p-4 form-container">
           <h2>Halo, Pewpeople</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod
-            ipsum et dui rhoncus auctor.
+            Silahkan isi data berikut untuk Login
           </p>
 
           {errMsg ? (

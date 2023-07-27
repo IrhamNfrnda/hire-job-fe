@@ -15,45 +15,32 @@ const CardCarousel = () => {
 
   const data = [
     {
-      photo: "/home_1.jpg",
-      name: "John Doe",
+      photo: "/Andi.jpg",
+      name: "Andi",
       job: "Web Developer",
-      opinion: "Swiper is great!",
+      opinion: "HireJob sangat membantu saya dalam mencari pekerjaan dengan fitur pencarian yang mudah dan notifikasi pekerjaan terbaru yang selalu update.",
     },
     {
-      photo: "/home_1.jpg",
-      name: "Jane Smith",
-      job: "Designer",
-      opinion: "I love the card carousel!",
+      photo: "/Fajar.jpeg",
+      name: "Fajar",
+      job: "HR Manager",
+      opinion: "Platform ini memberikan profil pekerja yang komprehensif, sehingga saya bisa menilai kualifikasi calon karyawan dengan lebih baik.",
     },
     ,
     {
-      photo: "/home_1.jpg",
-      name: "Jane Smith",
+      photo: "/Gina.jpg",
+      name: "Gina",
       job: "Designer",
-      opinion: "I love the card carousel!",
+      opinion: "HireJob memberikan pengalaman pengguna yang sangat baik dengan antarmuka yang intuitif dan mudah dinavigasi.",
     },
     ,
     {
-      photo: "/home_1.jpg",
-      name: "Jane Smith",
-      job: "Designer",
-      opinion: "I love the card carousel!",
+      photo: "/Joko.jpg",
+      name: "Joko",
+      job: "Perekrut",
+      opinion: "Saya merasa terkoneksi dengan talenta yang relevan secara lebih efisien berkat HireJob yang menyediakan database pekerja yang beragam.",
     },
     ,
-    {
-      photo: "/home_1.jpg",
-      name: "Jane Smith",
-      job: "Designer",
-      opinion: "I love the card carousel!",
-    },
-    ,
-    {
-      photo: "/home_1.jpg",
-      name: "Jane Smith",
-      job: "Designer",
-      opinion: "I love the card carousel!",
-    },
     // Add more data objects as needed
   ];
 
@@ -82,7 +69,10 @@ const CardCarousel = () => {
         {data.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="card">
-              <img src={item.photo} alt={item.name} />
+              <img style={{ 
+                width: '100%',
+                height: '200px',
+               }} src={item.photo} alt={item.name} />
               <h3>{item.name}</h3>
               <p>{item.job}</p>
               <p>{item.opinion}</p>

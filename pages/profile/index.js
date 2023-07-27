@@ -44,7 +44,7 @@ function Profile() {
             <div className="card p-4">
               <div className="d-flex justify-content-center">
                 <img
-                  src="/profile.jpg"
+                  src={userData?.photo}
                   alt="profile"
                   style={{
                     height: "150px",

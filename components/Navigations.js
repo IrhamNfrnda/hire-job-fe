@@ -4,14 +4,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import axios from "axios";
 
 function Navigations() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserData] = React.useState("")
 
   useEffect(() => {
     setIsAuthenticated(localStorage.getItem("auth") !== null);
   }, []);
-  
+
+  React.useEffect(() => {
+    axios
+      .get(`https://hire-job.onrender.com/v1/profile`)
+      .then((response) => {
+        setUserData(response?.data?.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -36,7 +49,7 @@ function Navigations() {
                 </Link> */}
                 <Dropdown align="end">
                   <Dropdown.Toggle variant="transparent" id="profile-dropdown">
-                    <img src="/profile_photos/profile_icon.png" alt="Profile" />
+                    <img src={userData.photo} alt="Profile" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="/profile">Profile</Dropdown.Item>
