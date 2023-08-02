@@ -42,7 +42,7 @@ The backend repository for this project can be found on GitHub at the following 
     <td>Profile Page</td>
   </tr>
    <tr>
-    <td><img width="350px" src="./screenshot/Home.jpeg" border="0" alt="Login" /></td>
+    <td><img width="350px" src="./screenshot/Home.png" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/profile.png" border="0"  alt="Register" /></td>
   </tr>
    <tr>
