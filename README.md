@@ -58,8 +58,8 @@ The backend repository for this project can be found on GitHub at the following 
     <td></td>
   </tr>
    <tr>
-    <td><img width="350px" src="./screenshot/Jobs.jpeg" border="0" alt="Login" /></td>
-    <td></td>
+    <td><img width="350px" src="./screenshot/Jobs.jpeg" border="0" alt="Jobs" /></td>
+    <td><img width="350px" src="./screenshot/Contactt.jpeg" border="0" alt="Contact" /></td>
   </tr>
 </table>
 
