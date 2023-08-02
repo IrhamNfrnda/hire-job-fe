@@ -109,7 +109,7 @@ export default function Home() {
           <div className="row justify-content-center">
             <div className="col-md-10">
               <h2 className="mb-5 text-center">
-                Their opinion about peworld
+              Pendapat mereka tentang Peworld
               </h2>
               <CardCarousel />
             </div>
