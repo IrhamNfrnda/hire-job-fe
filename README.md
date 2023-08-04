@@ -38,7 +38,7 @@ The backend repository for this project can be found on GitHub at the following 
 
 <table>
    <tr>
-    <td>Home Page/></td>
+    <td>Home Page</td>
     <td>Profile Page</td>
   </tr>
    <tr>
@@ -46,7 +46,7 @@ The backend repository for this project can be found on GitHub at the following 
     <td> <img width="350px" src="./screenshot/profile.png" border="0"  alt="Register" /></td>
   </tr>
    <tr>
-    <td>Login Page/></td>
+    <td>Login Page</td>
     <td>Register Page</td>
   </tr>
    <tr>
