@@ -86,6 +86,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or inquiries regarding this project, feel free to contact me at [irhamnfrnda@gmail.com](mailto:irhamnfrnda@gmail.com).
 
-- -
+---
 
 Thank you for exploring my Hire Job portfolio. I hope this project showcases my skills and enthusiasm for creating innovative solutions in the job recruitment industry.
