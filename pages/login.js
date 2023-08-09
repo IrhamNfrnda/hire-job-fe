@@ -9,7 +9,6 @@ function Login() {
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [errMsg, setErrMsg] = React.useState(null);
 
   React.useEffect(() => {
     if (localStorage.getItem("auth") !== null) {
@@ -22,19 +21,19 @@ function Login() {
 
     // show loading before axios finish
     Swal.fire({
-      title: "Please wait...",
+      title: "Mohon ditunggu...",
       allowOutsideClick: false,
       didOpen: () => {
         Swal.showLoading();
       },
     });
 
-    axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password })
+    axios.post(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/auth/login`, { email, password })
       .then((response) => {
         router.replace('/profile');
         Swal.fire({
-          title: "Login Success",
-          text: "Login success, redirect to app...",
+          title: "Login Berhasil",
+          text: "Login berhasil, kamu sedang dialihkan...",
           icon: "success",
         }).then(() => {
           console.log(response);
@@ -47,8 +46,12 @@ function Login() {
           router.replace('/profile');
         });
       })
-      .catch(({ response }) => {
-        setErrMsg(response?.data?.message ?? "Something wrong in our server");
+      .catch(({ error }) => {
+        Swal.fire({
+          title: "Gagal Login",
+          text: error?.data?.messages,
+          icon: "error",
+        })
       });
   };
 
@@ -81,12 +84,6 @@ function Login() {
           <p>
             Silahkan isi data berikut untuk Login
           </p>
-
-          {errMsg ? (
-            <div class="alert alert-danger" role="alert">
-              {errMsg}
-            </div>
-          ) : null}
 
           <form onSubmit={handleLogin}>
             <div class="mb-3">

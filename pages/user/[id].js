@@ -4,10 +4,33 @@ import Navigations from "@/components/Navigations";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
   const router = useRouter();
-  let company = [...new Array(2)];
+  const [userData, setUserData] = React.useState("")
+
+  React.useEffect(() => {
+
+    if (localStorage.getItem("auth") == null) {
+      router.replace("/login")
+    } else {
+      const id = router?.query?.id
+      axios
+        .get(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/job/detail/${id}`)
+        .then((response) => {
+          setUserData(response?.data?.data)
+        });
+    }
+  }, [])
+
+  const handleContact = () => {
+    router.push({
+      pathname: '/contact',
+      query: userData, 
+    });
+  };
 
   return (
     <div id="profile_page">
@@ -15,11 +38,11 @@ function Profile() {
 
       <div className="container mt-5 mb-5">
         <div className="row">
-          <div className="col col-md-4">
+          <div className="col col-md-4 col-sm-12">
             <div className="card p-4">
               <div className="d-flex justify-content-center">
                 <img
-                  src="/profile.jpg"
+                  src={userData?.photo}
                   alt="profile"
                   style={{
                     height: "150px",
@@ -30,40 +53,39 @@ function Profile() {
               </div>
 
               <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
-                Louis Tomlinson {router?.query?.id}
+                {userData?.fullname}
               </h1>
-              <p>Web Developer</p>
+              <p>{userData?.job_title}</p>
+
+              <div className="d-flex mb-3 align-items-center">
+                <FontAwesomeIcon icon={faLocationDot} />
+                <p className="text-muted ms-2 mb-0">
+                  {userData?.domicile}
+                </p>
+              </div>
 
               <p className="text-black-50">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum erat orci, mollis nec gravida sed, ornare quis urna.
-                Curabitur eu lacus fringilla, vestibulum risus at.
+                {userData?.description}
               </p>
 
-              <button className="btn btn-primary btn-lg mt-4 mb-3">Hire</button>
+
+              <button className="btn btn-primary btn-lg mt-4 mb-3" onClick={handleContact}>Rekrut</button>
 
               <h2 style={{ fontSize: "25px" }}>Skills</h2>
 
               <div className="d-inline">
-                {[
-                  "Phyton",
-                  "Laravel",
-                  "Golang",
-                  "Ruby",
-                  "Rust",
-                  "Javascript",
-                  "Express",
-                ].map((item, key) => (
+                {userData?.skills?.map((item, key) => (
                   <span key={key} class="badge bg-warning m-1 p-2 ">
                     {item}
                   </span>
                 ))}
               </div>
+
             </div>
           </div>
-          <div className="col col-md-8">
+          <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-4">
             <div className="card p-4">
-              <ul className="nav nav-underline">
+              <ul className="nav nav-underline mb-3">
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="#">
                     Pengalaman kerja
@@ -71,32 +93,34 @@ function Profile() {
                 </li>
               </ul>
 
-              {company.map((item, key) => (
-                <div className="row mt-4" key={key}>
-                  <div className="col col-md-2">
-                    <img src="https://res.cloudinary.com/infomediaon5/image/upload/v1688329705/agvbbsjlmjynzghhjb2d.jpg" style={{ width: "100%" }} />
+              {
+                userData?.job_history == 0 ? (
+                  <div className="d-flex justify-content-center">
+                    <h3 className="text-black-50 text-center mt-3">
+                      Belum ada pengalaman kerja
+                    </h3>
                   </div>
-                  <div className="col col-md-10">
-                    <h5 className="mb-0">Trainer</h5>
-                    <p className="mb-0">Pijar Camp</p>
-                    <div className="d-flex align-items-center">
-                      <p style={{ color: "#9EA0A5" }}>
-                        July 2019 - January 2020
-                      </p>
-                      <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>
-                        6 months
-                      </p>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vestibulum erat orci, mollis nec gravida sed, ornare quis
-                      urna. Curabitur eu lacus fringilla, vestibulum risus at.
-                    </p>
+                ) : (
+                  userData?.job_history?.map((item, key) => (
+                    <div className="row" key={key}>
+                      <div className="col col-md-2">
+                        <img src={item.logo} style={{ width: "100%" }} alt="Company Logo" />
+                      </div>
+                      <div className="col col-md-10">
+                        <h5 className="mb-0">{item.position}</h5>
+                        <p className="mb-0">{item.company}</p>
+                        <div className="d-flex align-items-center">
+                          <p style={{ color: "#9EA0A5" }}>{item.date}</p>
+                          <p style={{ marginLeft: "30px", color: "#9EA0A5" }}>6 bulan</p>
+                        </div>
+                        <p>{item.description}</p>
 
-                    {key === company.length - 1 ? null : <hr />}
-                  </div>
-                </div>
-              ))}
+                        {key === userData.job_history.length - 1 ? null : <hr />}
+                      </div>
+                    </div>
+                  ))
+                )
+              }
             </div>
           </div>
         </div>

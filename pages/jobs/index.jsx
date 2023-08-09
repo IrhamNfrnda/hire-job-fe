@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'next/link'
+import Link from "next/link";
 import Navigations from '@/components/Navigations'
 import Footer from '@/components/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,10 +19,12 @@ export default function jobs() {
 
     React.useEffect(() => {
         axios
-            .get(`https://hire-job.onrender.com/v1/job?page=${currentPage}`)
+            .get(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/job?page=${currentPage}`)
             .then((response) => {
-                const lastData = removeData(response?.data?.data?.rows, localStorage.getItem('userId'));
-                setProfiles(lastData);
+                const filteredData = response?.data?.data?.rows.filter((row) => row.id !== localStorage.getItem('userId'));
+                setProfiles(filteredData);
+                console.log(localStorage.getItem('userId'))
+                console.log(response?.data?.data?.rows.filter((row) => row.id !== localStorage.getItem('userId')))
                 setTotalPages(response?.data?.data?.total_page);
             })
             .catch((error) => console.error(error));
@@ -54,6 +56,11 @@ export default function jobs() {
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
+    }
+
+    const hendleHire = (e) => {
+        console.log(e.target)
+        currentPage
     }
 
     return (
@@ -128,10 +135,9 @@ export default function jobs() {
                                             </div>
                                         </div>
                                         <div class="col-md-3 d-flex justify-content-center justify-content-md-end me-1">
-                                            <button className="btn btn-primary">Lihat Profile</button>
-                                            {/* <Link href={`/user/${item.id}`}>
+                                            <Link href={`/user/${item.id}`}>
                                                 <button className="btn btn-primary">Lihat Profile</button>
-                                            </Link> */}
+                                            </Link>
                                         </div>
                                     </div>
                                     <hr />

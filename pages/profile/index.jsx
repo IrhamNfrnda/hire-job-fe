@@ -17,7 +17,7 @@ function Profile() {
     } else {
       // Fetch user data from the API
       axios
-        .get(`https://hire-job.onrender.com/v1/profile`)
+        .get(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/profile`)
         .then((response) => {
           setUserData(response?.data?.data);
         })
@@ -32,8 +32,6 @@ function Profile() {
     router.push('/profile/edit');
   };
 
-
-  let company = [...new Array(2)];
   return (
     <div id="profile_page">
       <Navigations />

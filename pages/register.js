@@ -25,13 +25,17 @@ export default function register() {
     const handleRegister = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            setErrMsg("Password tidak sama");
+            Swal.fire({
+                title: "Gagal Register",
+                text: "Password tidak sama",
+                icon: "error",
+              })
             return;
         }
 
         // show loading before axios finish
         Swal.fire({
-            title: "Please wait...",
+            title: "Mohon ditunggu...",
             allowOutsideClick: false,
             didOpen: () => {
                 Swal.showLoading();
@@ -39,7 +43,7 @@ export default function register() {
         });
 
         axios
-            .post(`https://hire-job.onrender.com/v1/auth/register`, {
+            .post(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/auth/register`, {
                 email: email,
                 password: password,
                 fullname: name,
@@ -49,15 +53,19 @@ export default function register() {
             })
             .then((result) => {
                 Swal.fire({
-                    title: "Register Success",
-                    text: "Register success, please login...",
+                    title: "Register Berhasil",
+                    text: "Register berhasil, silahkan login...",
                     icon: "success",
                 }).then(() => {
                     router.replace('/login');
                 });
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    title: "Register Gagal",
+                    text: error?.data?.messages,
+                    icon: "success",
+                })
             });
     };
 

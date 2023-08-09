@@ -6,13 +6,11 @@ import Footer from "@/components/Footer";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
   const router = useRouter();
-
   const [userData, setUserData] = React.useState("");
-
   const [fullname, setFullname] = React.useState("");
   const [job, setJob] = React.useState("");
   const [domicile, setDomicile] = React.useState("");
@@ -22,14 +20,18 @@ function Profile() {
   const [skills, setSkills] = React.useState([]);
   const [jobHistory, setJobHistory] = React.useState([]);
   const [jobImage, setJobImage] = React.useState(null);
+  const [selectedImage, setSelectedImage] = React.useState(null);
+  const [photoProfile, setPhotoProfile] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true)
 
 
   React.useEffect(() => {
+    // show loading before axios finish
     if (localStorage.getItem("auth") == null) {
       router.replace("/login");
     } else {
       axios
-        .get(`https://hire-job.onrender.com/v1/profile`)
+        .get(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/profile`)
         .then((response) => {
           setUserData(response?.data?.data);
           setFullname(response?.data?.data?.fullname);
@@ -40,12 +42,27 @@ function Profile() {
           setDescription(response?.data?.data?.description);
           setSkills(response?.data?.data?.skills);
           setJobHistory(response?.data?.data?.job_history);
+          setIsLoading(false);
+          Swal.close()
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
+          setIsLoading(false);
         });
     }
   }, []);
+
+  React.useEffect(() => {
+    if (isLoading) {
+      Swal.fire({
+        title: "Mohon ditunggu...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    }
+  }, [isLoading])
 
   const handleDeleteSkill = (index) => {
     const updatedSkills = [...skills];
@@ -65,12 +82,16 @@ function Profile() {
   };
 
   const handleDeleteJobHistory = (jobId) => {
+    setIsLoading(true);
     axios
-      .delete(`https://hire-job.onrender.com/v1/job/${jobId}`)
+      .delete(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/job/${jobId}`)
       .then((response) => {
         setJobHistory(response?.data?.data);
+        setIsLoading(false);
+        Swal.close()
       })
       .catch((error) => {
+        setIsLoading(false);
         Swal.fire({
           title: "Failed to add job history",
           text: error.messages,
@@ -81,6 +102,8 @@ function Profile() {
 
 
   const handleAddJobHistory = () => {
+    setIsLoading(true);
+
     const jobPosition = document.getElementById("jobPositionInput").value;
     const jobCompany = document.getElementById("jobCompanyInput").value;
     const jobDate = document.getElementById("jobDateInput").value;
@@ -98,14 +121,17 @@ function Profile() {
 
       console.log(formData);
 
-      axios.post(`https://hire-job.onrender.com/v1/job`, formData)
+      axios.post(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/job`, formData)
         .then(response => {
+          setIsLoading(false);
+          Swal.close()
           setJobHistory(response?.data?.data);
         })
         .catch(error => {
+          setIsLoading(false);
           Swal.fire({
             title: "Failed to add job history",
-            text: error.messages,
+            text: error?.response?.data?.messages?.description?.message || error?.response?.data?.messages,
             icon: "error",
           })
         });
@@ -118,8 +144,22 @@ function Profile() {
     }
   }
 
-  const handleImageInputChange = (event) => {
-    const file = event.target.files[0];
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      reader.onloadend = () => {
+        setPhotoProfile(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setSelectedImage(file);
+    }
+  };
+
+  const handleImageInputChange = (e) => {
+    const file = e.target.files[0];
     setJobImage(file);
   };
 
@@ -127,13 +167,15 @@ function Profile() {
     const skillData = {
       skills: skills,
     };
-  
+
     axios
-      .post("https://hire-job.onrender.com/v1/skills", skillData)
+      .post(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/skills`, skillData)
       .then((response) => {
-        console.log(response);
+        setIsLoading(false);
+        Swal.close()
       })
       .catch((error) => {
+        setIsLoading(false);
         Swal.fire({
           title: "Failed to update skills",
           text: error.messages,
@@ -141,10 +183,21 @@ function Profile() {
         });
       });
   };
-  
-  const updateUser = () => {
+
+  const updateUser = async (e) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    if (selectedImage) {
+      await uploadPhoto()
+        .catch((error) => {
+          return;
+        });
+    }
+
     axios
-    .patch(`https://hire-job.onrender.com/v1/profile`, {
+      .patch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/profile`, {
         fullname,
         company,
         job_title: job,
@@ -152,7 +205,8 @@ function Profile() {
         description,
         domicile,
       })
-    .then((response) => {
+      .then((response) => {
+        setIsLoading(false);
 
         handlePostSkills();
 
@@ -165,7 +219,8 @@ function Profile() {
         router.replace('/profile');
 
       })
-    .catch((error) => {
+      .catch((error) => {
+        setIsLoading(false);
         Swal.fire({
           title: "Failed to update profile",
           text: error.messages,
@@ -178,7 +233,35 @@ function Profile() {
     router.replace('/profile');
   };
 
-  
+  const uploadPhoto = async () => {
+    const formData = new FormData();
+    formData.append("photo", selectedImage);
+    try {
+      const token = localStorage.getItem("token");
+      await axios.patch(
+        `${process.env.NEXT_PUBLIC_APP_BASE_URL}/profile/picture`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Gagal upload foto profil",
+        text: error.response?.data?.messages || "Error updating profile picture. Please try again later.",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+  };
+
+  const hideLoading = () => {
+    setIsLoading(false);
+  };
 
   return (
     <div id="profile_page">
@@ -190,7 +273,7 @@ function Profile() {
             <div className="card p-4">
               <div className="d-flex justify-content-center">
                 <img
-                  src="/profile.jpg"
+                  src={photoProfile || userData?.photo}
                   alt="profile"
                   style={{
                     height: "150px",
@@ -199,7 +282,6 @@ function Profile() {
                   }}
                 />
               </div>
-
               <h1 style={{ fontSize: "30px", marginTop: "30px" }}>
                 {fullname}
               </h1>
@@ -221,6 +303,22 @@ function Profile() {
             </div>
           </div>
           <div className="col col-md-8 col-sm-12 mt-md-0 mt-sm-5">
+            <div className="card p-4 mb-4">
+              <h3>Foto Profil</h3>
+              <hr />
+              <label
+                htmlFor="photoInput"
+                className="photo-input-label"
+              >
+                <input
+                  id="photoInput"
+                  type="file"
+                  accept="image/*"
+                  className="form-control photo-input"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
             <div className="card p-4 mb-4">
               <h3>Data Diri</h3>
               <hr />
@@ -323,27 +421,27 @@ function Profile() {
             <div className="card p-4">
               <h3>Pengalaman Kerja</h3>
               <hr />
-              <div className="col-md-2">
+              <div className="mb-4">
                 <div>
-                  <label htmlFor="imageInput" className="form-label text-muted">Logo Perusahaan</label>
-                  <input type="file" className="form-control" id="imageInput" onChange={handleImageInputChange} />
+                  <label htmlFor="imageInput" className="form-label text-muted photo-input-label">Logo Perusahaan</label>
+                  <input type="file" className="form-control photo-input" id="imageInput" onChange={handleImageInputChange} />
                 </div>
               </div>
               <div class="mb-4">
                 <label for="posisiInput" class="form-label text-muted">Posisi</label>
-                <input type="text" class="form-control" id="jobPositionInput" placeholder="Web developer" />
+                <input type="text" class="form-control" id="jobPositionInput" placeholder="Contoh: Full Stack Developer" />
               </div>
               <div className="row mb-4">
                 <div className="col-md-6">
                   <div>
                     <label for="companyInput" class="form-label text-muted">Nama perusahaan</label>
-                    <input type="text" class="form-control" id="jobCompanyInput" placeholder="PT Harus bisa" />
+                    <input type="text" class="form-control" id="jobCompanyInput" placeholder="Contoh: PT. SMARTRI Tbk" />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div>
                     <label for="dateInput" class="form-label text-muted">Bulan/tahun</label>
-                    <input type="text" class="form-control" id="jobDateInput" placeholder="Januari 2018" />
+                    <input type="text" class="form-control" id="jobDateInput" placeholder="Contoh: Januari 2018" />
                   </div>
                 </div>
               </div>

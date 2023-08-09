@@ -7,11 +7,13 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function Navigations() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [photoProfile, setPhotoProfile] = useState('/profile_photos/profile2.png')
 
   useEffect(() => {
     setIsAuthenticated(localStorage.getItem("auth") !== null);
+    setPhotoProfile(localStorage.getItem("userPhoto"))
   }, []);
-  
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -36,7 +38,12 @@ function Navigations() {
                 </Link> */}
                 <Dropdown align="end">
                   <Dropdown.Toggle variant="transparent" id="profile-dropdown">
-                    <img src="/profile_photos/profile2.png" alt="Profile" />
+                    <img style={{
+                        height: '40px',
+                        width: '40px',
+                        borderRadius: "50%",
+                       }}
+                      src={photoProfile} alt="Profile" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item href="/profile">Profile</Dropdown.Item>

@@ -64,7 +64,7 @@ export default function Home() {
         {/* Skill Tallent */}
         <section className="container third-section" style={{ marginBottom: "150px" }}>
           <div className="row justify-content-end">
-            <div className="col-md-5 order-md-1 order-2">
+            <div className="col-md-5 order-md-1 order-2 me-5">
               <h2>Skill Tallent</h2>
               <p className="mb-5">
               Peworld menyediakan talent yang memiliki skill unggulan.
