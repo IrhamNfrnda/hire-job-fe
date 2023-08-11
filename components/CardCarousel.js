@@ -73,7 +73,7 @@ const CardCarousel = () => {
                 width: '100%',
                 height: '200px',
                 objectFit: 'cover',
-                objectCover: 'top',
+                objectPosition: 'top',
                }} src={item.photo} alt={item.name} />
               <h3>{item.name}</h3>
               <p>{item.job}</p>
