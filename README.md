@@ -1,12 +1,12 @@
-# Hire Job Portfolio  📝👔🔍
+# Peworld Portfolio  📝👔🔍
 
 ## Project Description 🚀
 
-Hire Job offers a range of features designed to facilitate job search and recruitment. With a user-friendly interface, job seekers can easily search and explore available job opportunities. The platform aims to connect job seekers with potential employers, streamlining the job application process.
+Peworld offers a range of features designed to facilitate job search and recruitment. With a user-friendly interface, job seekers can easily search and explore available job opportunities. The platform aims to connect job seekers with potential employers, streamlining the job application process.
 
 ## Technologies Used 💻🛠️
 
-The Hire Job project is built using the following technologies:
+The Peworld project is built using the following technologies:
 
 - HTML
 - CSS
@@ -65,7 +65,7 @@ The backend repository for this project can be found on GitHub at the following 
 
 ## Getting Started 🏁🚀
 
-To set up the Hire Job project locally, follow these steps:
+To set up the Peworld project locally, follow these steps:
 
 1. Clone the backend repository from the provided link.
 2. Install the required dependencies using npm.
@@ -76,7 +76,7 @@ To set up the Hire Job project locally, follow these steps:
 
 ## Contributions 🤝🌟
 
-Contributions to the Hire Job project are welcome. If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request in the backend repository.
+Contributions to the Peworld project are welcome. If you find any issues or have suggestions for improvements, please feel free to open an issue or create a pull request in the backend repository.
 
 ## License 📜📝
 
