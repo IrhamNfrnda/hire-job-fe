@@ -27,7 +27,7 @@ The backend repository for this project can be found on GitHub at the following 
 
 - User-friendly job search and exploration
 - Job application management
-- Employer job posting and management
+- Employer recruiting
 - Candidate profile creation and editing
 - Job alerts and notifications
 - Seamless user experience with NEXT.JS
