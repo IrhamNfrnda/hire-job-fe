@@ -60,12 +60,12 @@ function Profile() {
               <div className="d-flex mb-3 align-items-center">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p className="text-muted ms-2 mb-0">
-                  {userData?.domicile}
+                  {userData?.domicile !== "-" ? userData?.domicile : "Belum ada lokasi"}
                 </p>
               </div>
 
               <p className="text-black-50">
-                {userData?.description}
+                {userData?.description !== "-" ? userData?.description : "Belum ada deskripsi"}
               </p>
 
 
@@ -74,11 +74,12 @@ function Profile() {
               <h2 style={{ fontSize: "25px" }}>Skills</h2>
 
               <div className="d-inline">
-                {userData?.skills?.map((item, key) => (
-                  <span key={key} class="badge bg-warning m-1 p-2 ">
-                    {item}
-                  </span>
-                ))}
+                {userData?.skills == 0 ? "Belum ada skill" :
+                  userData?.skills?.map((item, key) => (
+                    <span key={key} class="badge bg-warning m-1 p-2 ">
+                      {item}
+                    </span>
+                  ))}
               </div>
 
             </div>

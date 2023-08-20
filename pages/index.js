@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import React, { useEffect, useState } from "react";
 import Navigations from "@/components/Navigations";
 import Footer from "@/components/Footer";
 import CardCarousel from "../components/CardCarousel";
@@ -7,6 +8,12 @@ import CardCarousel from "../components/CardCarousel";
 import { useSelector } from "react-redux";
 
 export default function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(localStorage.getItem("auth") !== null);
+  }, []);
+
 
   return (
     <>
@@ -23,11 +30,19 @@ export default function Home() {
               <p className="d-block mb-5">
                 Peworld adalah aplikasi inovatif yang memberikan kemudahan bagi para pencari kerja dan perekrut dalam menemukan talenta terbaik untuk mendukung perubahan di era Revolusi Industri 4.0.
               </p>
-              <Link href="/register">
-                <button className="btn btn-primary btn-lg">
-                  Mulai Dari Sekarang
-                </button>
-              </Link>
+              {
+                isAuthenticated ?
+                  <Link href="/jobs">
+                    <button className="btn btn-primary btn-lg">
+                      Mulai Dari Sekarang
+                    </button>
+                  </Link> :
+                  <Link href="/register">
+                    <button className="btn btn-primary btn-lg">
+                      Mulai Dari Sekarang
+                    </button>
+                  </Link>
+              }
             </div>
             <div className="col-md-5 order-md-2 order-1 image-container">
               <img src="home_image1_full.png" className="image-fill" alt="Home Picture" />
@@ -67,7 +82,7 @@ export default function Home() {
             <div className="col-md-5 order-md-1 order-2 me-5">
               <h2>Skill Tallent</h2>
               <p className="mb-5">
-              Peworld menyediakan talent yang memiliki skill unggulan.
+                Peworld menyediakan talent yang memiliki skill unggulan.
               </p>
 
               <div className="row justify-content-between">
@@ -109,7 +124,7 @@ export default function Home() {
           <div className="row justify-content-center">
             <div className="col-md-10">
               <h2 className="mb-5 text-center">
-              Pendapat mereka tentang Peworld
+                Pendapat mereka tentang Peworld
               </h2>
               <CardCarousel />
             </div>

@@ -63,8 +63,8 @@ export default function register() {
             .catch((error) => {
                 Swal.fire({
                     title: "Register Gagal",
-                    text: error?.data?.messages,
-                    icon: "success",
+                    text: error?.response?.data?.messages,
+                    icon: "error",
                 })
             });
     };
@@ -72,7 +72,7 @@ export default function register() {
 
     return (
         <main className="container" id="auth_page">
-            <div className="row align-items-center mt-3">
+            <div className="row align-items-center">
                 <div className="col col-md-6 side-screen">
                     <div style={{ position: "relative" }}>
                         <div

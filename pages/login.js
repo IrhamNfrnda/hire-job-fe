@@ -49,7 +49,7 @@ function Login() {
       .catch(({ error }) => {
         Swal.fire({
           title: "Gagal Login",
-          text: error?.data?.messages,
+          text: error?.response?.data?.messages,
           icon: "error",
         })
       });
@@ -57,7 +57,7 @@ function Login() {
 
   return (
     <main className="container" id="auth_page">
-      <div className="row align-items-center mt-3">
+      <div className="row align-items-center">
         <div className="col col-md-6 side-screen">
           <div style={{ position: "relative" }}>
             <div

@@ -23,6 +23,7 @@ function Profile() {
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [photoProfile, setPhotoProfile] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true)
+  const [isSkillsChanged, setisSkillsChanged] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -66,6 +67,7 @@ function Profile() {
 
   const handleDeleteSkill = (index) => {
     const updatedSkills = [...skills];
+    setisSkillsChanged(true);
     updatedSkills.splice(index, 1);
     setSkills(updatedSkills);
   };
@@ -74,6 +76,7 @@ function Profile() {
     const skillInput = document.getElementById("skillInput");
 
     if (skillInput.value) {
+      setisSkillsChanged(true);
       const newSkill = skillInput.value;
       const updatedSkills = [...skills, newSkill];
       setSkills(updatedSkills);
@@ -113,7 +116,7 @@ function Profile() {
     const formData = new FormData();
     formData.append("position", jobPosition);
     formData.append("company", jobCompany);
-    formData.append("date", jobDate);
+    formData.append("date", changeDateFormat(jobDate));
     formData.append("description", jobDescription);
     formData.append("photo", jobImage);
 
@@ -126,21 +129,26 @@ function Profile() {
           setIsLoading(false);
           Swal.close()
           setJobHistory(response?.data?.data);
+          document.getElementById("jobPositionInput").value = "";
+          document.getElementById("jobCompanyInput").value = "";
+          document.getElementById("jobDateInput").value = "";
+          document.getElementById("jobDescriptionInput").value = "";
+          document.getElementById("imageInput").value = "";
+          setJobImage(null);
+          setSelectedImage(null);
         })
         .catch(error => {
           setIsLoading(false);
           Swal.fire({
             title: "Failed to add job history",
-            text: error?.response?.data?.messages?.description?.message || error?.response?.data?.messages,
+            text: error?.response?.data?.messages?.description?.message ||
+              error?.response?.data?.messages?.position?.message ||
+              error?.response?.data?.messages?.company?.message ||
+              error?.response?.data?.messages?.date?.message ||
+              error?.response?.data?.messages?.photo?.message,
             icon: "error",
           })
         });
-
-      document.getElementById("jobPositionInput").value = "";
-      document.getElementById("jobCompanyInput").value = "";
-      document.getElementById("jobDateInput").value = "";
-      document.getElementById("jobDescriptionInput").value = "";
-      setJobImage(null);
     }
   }
 
@@ -208,7 +216,9 @@ function Profile() {
       .then((response) => {
         setIsLoading(false);
 
-        handlePostSkills();
+        if (isSkillsChanged) {
+          handlePostSkills();
+        }
 
         Swal.fire({
           title: "Profile updated",
@@ -223,7 +233,12 @@ function Profile() {
         setIsLoading(false);
         Swal.fire({
           title: "Failed to update profile",
-          text: error.messages,
+          text: error?.response?.data?.messages?.fullname?.message ||
+            error?.response?.data?.messages?.job_title?.message ||
+            error?.response?.data?.messages?.company?.message ||
+            error?.response?.data?.messages?.phone?.message ||
+            error?.response?.data?.messages?.domicile?.message ||
+            error?.response?.data?.messages?.description?.message,
           icon: "error",
         });
       });
@@ -263,6 +278,12 @@ function Profile() {
     setIsLoading(false);
   };
 
+  const changeDateFormat = (dateString) => {
+    const parts = dateString.split('-');
+    const newDateFormat = parts[1] + '-' + parts[0];
+    return newDateFormat;
+  }
+
   return (
     <div id="profile_page">
       <Navigations />
@@ -290,12 +311,12 @@ function Profile() {
               <div className="d-flex mb-3 align-items-center">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p className="text-muted ms-2 mb-0">
-                  {domicile}
+                  {domicile != "-" ? domicile : "Belum ada lokasi"}
                 </p>
               </div>
 
               <p className="text-black-50">
-                {description}
+                {description != "-" ? description : "Belum ada deskripsi"}
               </p>
 
               <button className="btn btn-primary btn-lg mt-4 " onClick={updateUser}>Simpan</button>
@@ -383,9 +404,10 @@ function Profile() {
                   class="form-control"
                   id="descriptionTextArea"
                   rows="3"
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 >
-                  {description}
+                 {description}p
                 </textarea>
               </div>
             </div>
@@ -441,7 +463,7 @@ function Profile() {
                 <div className="col-md-6">
                   <div>
                     <label for="dateInput" class="form-label text-muted">Bulan/tahun</label>
-                    <input type="text" class="form-control" id="jobDateInput" placeholder="Contoh: Januari 2018" />
+                    <input type="month" class="form-control" id="jobDateInput" placeholder="Contoh: Januari 2018" />
                   </div>
                 </div>
               </div>
