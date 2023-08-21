@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
-function Profile() {
+function EditProfile() {
   const router = useRouter();
   const [userData, setUserData] = React.useState("");
   const [fullname, setFullname] = React.useState("");
@@ -407,7 +407,6 @@ function Profile() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 >
-                 {description}p
                 </textarea>
               </div>
             </div>
@@ -524,5 +523,5 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default EditProfile;
 
