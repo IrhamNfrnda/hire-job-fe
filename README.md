@@ -11,7 +11,7 @@ The Peworld project is built using the following technologies:
 - HTML
 - CSS
 - JavaScript
-- Bootstrap
+- Bootstrap 5
 - SASS (Syntactically Awesome Style Sheets)
 - JQuery
 - NEXT.JS (React framework)
