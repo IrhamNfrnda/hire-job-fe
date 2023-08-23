@@ -67,9 +67,19 @@ function EditProfile() {
 
   const handleDeleteSkill = (index) => {
     const updatedSkills = [...skills];
-    setisSkillsChanged(true);
-    updatedSkills.splice(index, 1);
-    setSkills(updatedSkills);
+    axios
+      .delete(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/skills/${index}`)
+      .then((response) => {
+        updatedSkills.splice(index, 1);
+        setSkills(updatedSkills);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Failed to delete skill",
+          text: error.messages,
+          icon: "error",
+        })
+      });
   };
 
   const handleAddSkill = () => {
